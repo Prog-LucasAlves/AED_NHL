@@ -1,5 +1,5 @@
 name:
-    Extract Workflow
+    Workflow
 
 on:
     schedule:
