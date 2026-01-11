@@ -197,7 +197,7 @@ def show_dashboard(analyzer):
     col1, col2, col3 = st.columns([3, 2, 1])
 
     with col1:
-        st.markdown("<h2 class='sub-header'>📊 Classificação Atual</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 class='sub-header'>📊 Classificação Atual | 2025-2026</h2>", unsafe_allow_html=True)
 
         # Preparar dados para exibição
         display_df = latest_data.copy()
@@ -220,10 +220,14 @@ def show_dashboard(analyzer):
                 break
 
         # Adicionar colunas de estatísticas
-        stat_cols = ['team_points']
+        stat_cols = ['team_logo', 'team_points']
         for col in stat_cols:
             if col in display_df.columns:
                 columns_to_show.append(col)
+
+        # Alterar nome da coluna de pontos
+        if 'posição' in columns_to_show:
+            display_df = display_df.rename(columns={'posição': 'Posição'})
 
         # Exibir tabela
         st.dataframe(
@@ -234,6 +238,43 @@ def show_dashboard(analyzer):
                 'team_logo': st.column_config.ImageColumn("Logo", width="small")
             }
         )
+
+    with col2:
+        st.markdown("<h3 class='sub-header'>🏆 Top 5 Times</h3>", unsafe_allow_html=True)
+
+        if 'team_points' in latest_data.columns:
+            top_teams = latest_data.nlargest(5, 'team_points')
+
+            for idx, team in top_teams.iterrows():
+                # Tentar obter nome do time
+                team_name = "Time Desconhecido"
+                for name_col in ['team_name']:
+                    if name_col in team and pd.notna(team[name_col]):
+                        team_name = str(team[name_col])
+                        break
+
+                # Obter pontos
+                points = team.get('team_points', 0)
+
+                # Card do time
+                st.markdown(f"""
+                <div class="team-card">
+                    <strong>#{idx + 1} {team_name}</strong><br>
+                    <span style="font-size: 1.2em;">{points} pontos</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+        # Estatísticas rápidas
+        st.markdown("<h3 class='sub-header'>📈 Estatísticas</h3>", unsafe_allow_html=True)
+
+        if not latest_data.empty:
+            col_stat1, col_stat2 = st.columns(2)
+
+            with col_stat1:
+                if 'team_points' in latest_data.columns:
+                    avg_points = latest_data['team_points'].mean()
+                    st.metric("Média de Pontos", f"{avg_points:.1f}")
+
 
 if __name__ == "__main__":
     main()
