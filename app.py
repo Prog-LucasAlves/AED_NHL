@@ -127,7 +127,7 @@ def main():
     analyzer = NHLDataAnalyzer()
 
     # Título principal
-    st.markdown("<h1 class='main-header'>🏒 NHL Data Dashboard</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='main-header'>🏒 NHL Data Dashboard | Temporada Regular</h1>", unsafe_allow_html=True)
 
     # Sidebar com informações
     with st.sidebar:
@@ -208,30 +208,35 @@ def show_dashboard(analyzer):
 
         # Resetar índice para posição
         display_df = display_df.reset_index(drop=True)
-        display_df["posição"] = display_df.index + 1
+        display_df["Posição"] = display_df.index + 1
 
         # Selecionar colunas para exibir
-        columns_to_show = ['posição']
+        columns_to_show = ['Posição']
 
         # Adicionar colunas disponíveis
-        for col in ['team_name']:
+        for col in ['team_logo', 'team_name']:
             if col in display_df.columns:
                 columns_to_show.append(col)
                 break
 
         # Adicionar colunas de estatísticas
-        stat_cols = ['team_logo', 'team_points']
+        stat_cols = ['team_name', 'gamesPlayed', 'team_points', ]
         for col in stat_cols:
             if col in display_df.columns:
                 columns_to_show.append(col)
 
+
         # Exibir tabela
         st.dataframe(
             display_df[columns_to_show],
-            use_container_width=True,
+            width="content",
             hide_index=True,
             column_config={
-                'team_logo': st.column_config.ImageColumn("Logo", width="small")
+                'Posição': st.column_config.NumberColumn("Posição", width="small",),
+                'team_logo': st.column_config.ImageColumn("Logo", width="small"),
+                'team_name': st.column_config.TextColumn("Time", width="medium"),
+                'gamesPlayed': st.column_config.NumberColumn("Jogos", width="small"),
+                'team_points': st.column_config.NumberColumn("Pontos", width="small")
             }
         )
 
