@@ -80,9 +80,9 @@ class NHLDataAnalyzer:
 
                 all_data[season] = df
 
-                st.sidebar.success(f"✅ {season}: {len(df)} times")
             except Exception as e:
-                st.sidebar.error(f"❌ Erro em {file_path.name}: {e}")
+                print(f"Erro ao carregar {file_path}: {e}")
+
 
         return all_data
 
@@ -131,7 +131,7 @@ def main():
 
     # Sidebar com informações
     with st.sidebar:
-        st.image("https://www-league.nhlstatic.com/images/logos/league-dark/133-flat.svg", width=200)
+        st.image("https://media.d3.nhle.com/image/private/t_q-best/prd/assets/nhl/logos/nhl_shield_wm_on_dark_fqkbph", width=200)
         st.markdown("---")
 
         st.markdown("### 📊 Menu de Navegação")
@@ -206,7 +206,34 @@ def show_dashboard(analyzer):
         if 'team_points' in display_df.columns:
             display_df.sort_values(by='team_points', ascending=False)
 
+        # Resetar índice para posição
+        display_df = display_df.reset_index(drop=True)
+        display_df["posição"] = display_df.index + 1
 
+        # Selecionar colunas para exibir
+        columns_to_show = ['posição']
+
+        # Adicionar colunas disponíveis
+        for col in ['team_name']:
+            if col in display_df.columns:
+                columns_to_show.append(col)
+                break
+
+        # Adicionar colunas de estatísticas
+        stat_cols = ['team_points']
+        for col in stat_cols:
+            if col in display_df.columns:
+                columns_to_show.append(col)
+
+        # Exibir tabela
+        st.dataframe(
+            display_df[columns_to_show],
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                'team_logo': st.column_config.ImageColumn("Logo", width="small")
+            }
+        )
 
 if __name__ == "__main__":
     main()
