@@ -80,7 +80,7 @@ def main():
 
     # Sidebar
     with st.sidebar:
-        st.image("https://media.d3.nhle.com/image/private/t_q-best/prd/assets/nhl/logos/nhl_shield_wm_on_dark_fqkbph", width=20)
+        st.image("https://media.d3.nhle.com/image/private/t_q-best/prd/assets/nhl/logos/nhl_shield_wm_on_dark_fqkbph", width=200)
         st.markdown("---")
 
         st.markdown("### 📊 Menu de Navegação")
