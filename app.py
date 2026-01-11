@@ -225,10 +225,6 @@ def show_dashboard(analyzer):
             if col in display_df.columns:
                 columns_to_show.append(col)
 
-        # Alterar nome da coluna de pontos
-        if 'posição' in columns_to_show:
-            display_df = display_df.rename(columns={'posição': 'Posição'})
-
         # Exibir tabela
         st.dataframe(
             display_df[columns_to_show],
