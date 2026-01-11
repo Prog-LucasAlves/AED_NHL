@@ -84,3 +84,15 @@ def main():
         st.markdown("---")
 
         st.markdown("### 📊 Menu de Navegação")
+        page = st.radio(
+            "Selecione a página:",
+            ["📈 Visão Geral", "🏆 Classificações", "📊 Análise Temporal", "⚙️ Extrair Dados"]
+        )
+
+        st.markdown("---")
+        st.markdown("### 🔧 Configurações")
+        auto_refresh = st.checkbox("Atualização Automática", value=False)
+
+
+if __name__ == "__main__":
+    main()
