@@ -3,8 +3,11 @@ name:
 
 on:
     schedule:
-      - cron: '0 0 * * 0'
+      - cron: '0 13 */2 * *'
     workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
 
@@ -27,7 +30,7 @@ jobs:
 
             - name: Run Extraction Script
               run: |
-                  python extract.py
+                  python extract_player.py extract_team.py
 
             - name: Commit and Push Changes
               uses: stefanzweifel/git-auto-commit-action@v5
