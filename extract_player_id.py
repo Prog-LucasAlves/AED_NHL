@@ -1,0 +1,92 @@
+"""
+Sistema de Extração de Dados da NHL com estruturas de dados personalidades.
+
+API Base: https://api-web.nhle.com/v1
+"""
+import requests
+import pandas as pd
+import time
+from datetime import datetime
+from pathlib import Path
+
+class SimpleNHLExtractor:
+    def __init__(self):
+        self.base_url = "https://api.nhle.com/stats/rest/en/skater/summary?limit=-1&start=0&sort=points&cayenneExp=seasonId="
+        self.session = requests.Session()
+
+    def fetch_season_data(self, date):
+        """Busca dados de uma temporada específica."""
+
+        url = f"{self.base_url}{date}"
+
+        try:
+            response = self.session.get(url, timeout=10)
+            if response.status_code == 200:
+                return response.json()
+        except Exception as e:
+            print(f"Erro ao buscar dados para a data {date}: {e}")
+        return None
+
+    def process_team_data(self, team):
+        """processa dados dos jogadores"""
+
+        return {
+            'playerId': team.get('playerId'),
+            'skaterFullName': team.get('skaterFullName'),
+            'teamAbbrevs': team.get('teamAbbrevs'),
+
+        }
+
+    def save_data(self, data, season_id):
+        """Salva os dados em um arquivo CSV."""
+
+        if not data:
+            print(f"Sem dados para salvar da temporada {season_id}")
+            return
+
+        df = pd.DataFrame(data)
+        filename = f"nhl_standings_players_{season_id}_id.csv"
+        filepath = Path("data/player") / filename
+
+        # Cria o diretório se não existir
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+
+        df.to_csv(filepath, index=False, sep=';')
+        print(f"✔️ {filepath} salvo ({len(data)} times).")
+
+def main():
+    """Função principal para executar a extração."""
+
+    print("🏒 Extraindo dados da NHL...")
+
+    dates = ['20252026']
+
+    extractor = SimpleNHLExtractor()
+
+    for date in dates:
+        print(f"📅 Processando dados para a data: {date}")
+
+        data = extractor.fetch_season_data(date)
+        if not data:
+            continue
+
+        standings = data.get('data', [])
+        if not standings:
+            print(f"Sem dados para a data: {date}")
+            continue
+
+        season_id = standings[0].get('seasonId', 'unknown')
+
+        all_teams = []
+        for team in standings:
+            team_data = extractor.process_team_data(team)
+            all_teams.append(team_data)
+
+        # Salva os dados
+        extractor.save_data(all_teams, season_id)
+
+        time.sleep(1)  # Respeita o limite da API
+
+
+if __name__ == "__main__":
+    main()
