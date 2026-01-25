@@ -1,11 +1,10 @@
 [project]
 name = "aed-nhl"
 version = "0.1.0"
-description = "Add your description here"
+description = "Análise de dados da NHL com estruturas de dados"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "nhl-api-py>=3.1.1",
     "pandas>=2.3.3",
     "plotly>=6.5.1",
     "requests>=2.32.5",
