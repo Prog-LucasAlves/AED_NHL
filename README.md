@@ -6,7 +6,7 @@
 
 ### 🚨 ***Projeto em Construção*** 🚨
 
-### 📅 ***[Todo]()*** 📅
+### 📅 ***[Todo](https://github.com/Prog-LucasAlves/AED_NHL/blob/main/Todo)*** 📅
 
 ### ⏰ ***Atualizado em 25/01/2026***
 
@@ -229,8 +229,14 @@ Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](https
 ## 📚 Referências
 
 - [Documentação NHL API](https://github.com/Zmalski/NHL-API-Reference)
+- [Documentação Streamli](https://docs.streamlit.io/)
+- [Documentação Pandas](https://pandas.pydata.org/docs/)
+- [Documentação Render](https://render.com/docs)
 
 ## ✨ Agradecimentos
 
-©︎ ®︎
+- Dados fornecidos pela NHL API
+- Comunidade Streamlit pelo framework incrível
+- Render pela hospedagem gratuita para projetos open source
+
 ---
