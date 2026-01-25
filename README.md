@@ -2,6 +2,16 @@
 
 ![A](https://img.shields.io/badge/python-3.13+-blue.svg) ![B](https://img.shields.io/badge/license-MIT-green.svg) ![C](https://github.com/Prog-LucasAlves/AED_NHL/actions/workflows/extract.yml/badge.svg) ![D](https://img.shields.io/badge/Streamlit-1.52.2-FF4B4B) ![E](https://img.shields.io/badge/Deploy-Render-46B3E6)
 
+![ ](https://github.com/Prog-LucasAlves/AED_NHL/blob/main/image/app.png?raw=true)
+
+### 🚨 ***Projeto em Construção*** 🚨
+
+### 📅 ***[Todo]()*** 📅
+
+### ⏰ ***Atualizado em 25/01/2026***
+
+---
+
 ## 📋 Índice
   - [📋 Índice](#-índice)
   - [🎯 Visão Geral](#-visão-geral)
@@ -9,8 +19,12 @@
   - [📊 Arquivos Principais](#-arquivos-principais)
   - [🛠️ Configuração do Ambiente](#️-configuração-do-ambiente)
   - [🚀 Instalação Local](#-instalação-local)
-  - [📊 API da NHL](#-api-da-nhl)
+  - [🖥️ API da NHL](#-api-da-nhl)
   - [🌐 Deploy na Render](#-deploy-na-render)
+  - [🤝 Como Contribuir](#-como-contribuir)
+  - [📄 Licença](#-licença)
+  - [📚 Referências](#-referências)
+  - [✨ Agradecimentos](#-agradecimentos)
 
 ## 🎯 Visão Geral
 
@@ -181,7 +195,7 @@ pre-commit install
 streamlit run app.py
 ```
 
-## 📊 API da NHL
+## 🖥️ API da NHL
 
 Os módulos de extração utilizam a API pública da NHL:
 
@@ -195,4 +209,28 @@ Os módulos de extração utilizam a API pública da NHL:
 **Configuração do Deploy**
 
 1. Build Command: **`uv sync`**
-2. Start Command:
+2. Start Command: **`streamlit run app`**
+3. Python Version(Environmen): **`3.13.5`**
+
+🔗 **Link do Deploy:** [https://aed-nhl.onrender.com/](https://aed-nhl.onrender.com/)
+
+## 🤝 Como Contribuir
+
+1. Faça fork do projeto
+2. Crie uma branch: **`git checkout -b feature`**
+3. Faça commit: **`git commit -m '...'`**
+4. Push: **`git push origin feature`**
+5. Abra um Pull Request 🔜 [AQUI](https://github.com/Prog-LucasAlves/AED_NHL/pulls)
+
+## 📄 Licença
+
+Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](https://github.com/Prog-LucasAlves/AED_NHL/blob/main/LICENSE) para detalhes.
+
+## 📚 Referências
+
+- [Documentação NHL API](https://github.com/Zmalski/NHL-API-Reference)
+
+## ✨ Agradecimentos
+
+©︎ ®︎
+---
