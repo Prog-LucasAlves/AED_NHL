@@ -1,27 +1,24 @@
 """
 App Streamlit para visualização de dados da NHL a partir de arquivos CSV.
 """
+
 import streamlit as st
 import pandas as pd
 from datetime import datetime
 from pathlib import Path
-import plotly.express as px
-import plotly.graph_objects as go
-import numpy as np
 import base64
-from io import BytesIO
-import pandas as pd
 
 # Configuração da página
 st.set_page_config(
     page_title="NHL Data Dashboard",
     page_icon="🏒",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
 # CSS personalizado
-st.markdown("""
+st.markdown(
+    """
 <style>
     .main-header {
         font-size: 2.5rem;
@@ -58,7 +55,10 @@ st.markdown("""
         border-radius: 5px;
     }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
+
 
 class NHLDataAnalyzer:
     def __init__(self):
@@ -76,17 +76,16 @@ class NHLDataAnalyzer:
         for file_path in data_files:
             try:
                 season = file_path.stem.replace("nhl_standings_", "")
-                df = pd.read_csv(file_path, sep=';')
+                df = pd.read_csv(file_path, sep=";")
 
                 # Adicionar coluna de temporada se não existir
-                if 'season' not in df.columns:
-                    df['season'] = season
+                if "season" not in df.columns:
+                    df["season"] = season
 
                 all_data[season] = df
 
             except Exception as e:
                 print(f"Erro ao carregar {file_path}: {e}")
-
 
         return all_data
 
@@ -96,12 +95,11 @@ class NHLDataAnalyzer:
 
         for file_path in data_files:
             try:
-                df = pd.read_csv(file_path, sep=';')
+                df = pd.read_csv(file_path, sep=";")
             except Exception as e:
                 print(f"Erro ao carregar {file_path}: {e}")
 
         return df
-
 
     def get_latest_season_data(self):
         """Obtém os dados da temporada mais recente."""
@@ -124,18 +122,22 @@ class NHLDataAnalyzer:
         merged_df = pd.DataFrame()
         for season, df in all_data.items():
             df_copy = df.copy()
-            df_copy['season'] = season
+            df_copy["season"] = season
             merged_df = pd.concat([merged_df, df_copy], ignore_index=True)
 
         return merged_df
 
+
 def create_download_link(df, filename):
     """Cria um link para download do DataFrame."""
 
-    csv = df.to_csv(index=False, sep=';').encode('utf-8')
+    csv = df.to_csv(index=False, sep=";").encode("utf-8")
     b64 = base64.b64encode(csv).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">📥 Baixar CSV</a>'
+    href = (
+        f'<a href="data:file/csv;base64,{b64}" download="{filename}">📥 Baixar CSV</a>'
+    )
     return href
+
 
 def main():
     """Aplicativo principal Streamlit."""
@@ -144,18 +146,21 @@ def main():
     analyzer = NHLDataAnalyzer()
 
     # Título principal
-    st.markdown("<h1 class='main-header'>🏒 NHL Data Dashboard | Temporada Regular</h1>", unsafe_allow_html=True)
+    st.markdown(
+        "<h1 class='main-header'>🏒 NHL Data Dashboard | Temporada Regular</h1>",
+        unsafe_allow_html=True,
+    )
 
     # Sidebar com informações
     with st.sidebar:
-        st.image("https://media.d3.nhle.com/image/private/t_q-best/prd/assets/nhl/logos/nhl_shield_wm_on_dark_fqkbph", width=200)
+        st.image(
+            "https://media.d3.nhle.com/image/private/t_q-best/prd/assets/nhl/logos/nhl_shield_wm_on_dark_fqkbph",
+            width=200,
+        )
         st.markdown("---")
 
         st.markdown("### 📊 Menu de Navegação")
-        page = st.radio(
-            "Selecione a página:",
-            ["🏠 Dashboard", "📋 Dados Completos", "📈 Análise Comparativa", "🏒 Jogadores"]
-        )
+        page = st.radio("Selecione a página:", ["📋 Dados Completos", "🏒 Jogadores"])
 
         st.markdown("---")
         st.markdown("### 📁 Dados Carregados")
@@ -182,93 +187,26 @@ def main():
             """)
 
         st.markdown("---")
-        st.markdown(f"**Última atualização:** {datetime.now().strftime('%d/%m/%Y %H:%M')}")
-
-    # Página: Dashboard
-    if page == "🏠 Dashboard":
-        show_dashboard(analyzer)
+        st.markdown(
+            f"**Última atualização:** {datetime.now().strftime('%d/%m/%Y %H:%M')}"
+        )
 
     # Página: Dados Completos
-    elif page == "📋 Dados Completos":
+    if page == "📋 Dados Completos":
         show_complete_data(analyzer)
 
-    # Página: Análise Comparativa
-    elif page == "📈 Análise Comparativa":
-        show_comparative_analysis(analyzer)
-
-    #Página: Dados Jogadores
+    # Página: Dados Jogadores
     elif page == "🏒 Jogadores":
         show_player_data(analyzer)
 
-def show_dashboard(analyzer):
-    """Mostra o dashboard principal."""
-
-    # carregar dados da temporada mais recente
-    latest_data = analyzer.get_latest_season_data()
-
-    if latest_data is None or latest_data.empty:
-        st.warning("Nenhum dado disponível. Verifique os arquivos CSV.")
-        return
-
-    # Layout do dashboard
-    col1, = st.columns(1)
-
-    with col1:
-        st.markdown("<h2 class='sub-header'>📊 Classificação Atual | 2025-2026</h2>", unsafe_allow_html=True)
-
-        # Preparar dados para exibição
-        display_df = latest_data.copy()
-
-        # Ordernar por pontos
-        if 'team_points' in display_df.columns:
-            display_df.sort_values(by='team_points', ascending=False)
-
-        # Resetar índice para posição
-        display_df = display_df.reset_index(drop=True)
-        display_df["Posição"] = display_df.index + 1
-
-        # Selecionar colunas para exibir
-        columns_to_show = ['Posição']
-
-        # Adicionar colunas disponíveis
-        for col in ['team_logo', 'team_name']:
-            if col in display_df.columns:
-                columns_to_show.append(col)
-                break
-
-        # Adicionar colunas de estatísticas
-        stat_cols = ['team_name', 'gamesPlayed', 'wins', 'losses', 'otLosses', 'team_points', 'pointPctg', 'goalFor', 'goalAgainst']
-        for col in stat_cols:
-            if col in display_df.columns:
-                columns_to_show.append(col)
-
-
-        # Exibir tabela
-        st.dataframe(
-            display_df[columns_to_show],
-            width="content",
-            hide_index=True,
-            column_config={
-                'Posição': st.column_config.NumberColumn("Posição", width="small",),
-                'team_logo': st.column_config.ImageColumn("Logo", width="small"),
-                'team_name': st.column_config.TextColumn("Time", width="medium"),
-                'gamesPlayed': st.column_config.NumberColumn("Jogos", width="small"),
-                'wins': st.column_config.NumberColumn("Vitórias", width="small"),
-                'losses': st.column_config.NumberColumn("Derrotas", width="small"),
-                'otLosses': st.column_config.NumberColumn("OT", width="small"),
-                'team_points': st.column_config.NumberColumn("Pontos", width="small"),
-                'pointPctg': st.column_config.NumberColumn("Pontos %", width="small", format="%.3f")
-            }
-        )
-
-    col1 = st.columns(1)[0]
-    with col1:
-        st.markdown("<h3 class='sub-header'>📈 Estatísticas</h3>", unsafe_allow_html=True)
 
 def show_complete_data(analyzer):
     """Mostra todos os dados disponíveis."""
 
-    st.markdown("<h2 class='sub-header'>📋 Dados Completos das Temporadas</h2>", unsafe_allow_html=True)
+    st.markdown(
+        "<h2 class='sub-header'>📋 Dados Completos das Temporadas</h2>",
+        unsafe_allow_html=True,
+    )
 
     all_data = analyzer.load_all_data_team()
 
@@ -279,14 +217,17 @@ def show_complete_data(analyzer):
     # Seletor de temporada
     seasons = sorted(all_data.keys(), reverse=True)
 
-    #seasons = [f"{season[:4]} - {season[4:]}" for season in seasons]
-    st.markdown("""
+    # seasons = [f"{season[:4]} - {season[4:]}" for season in seasons]
+    st.markdown(
+        """
     <style>
     .stSelectbox > div[data-baseweb="select"] > div {
         width: 200px;  /* ajuste a largura */
     }
     </style>
-""", unsafe_allow_html=True)
+""",
+        unsafe_allow_html=True,
+    )
     selected_season = st.selectbox("Selecione a temporada:", seasons)
 
     if selected_season in all_data:
@@ -299,88 +240,100 @@ def show_complete_data(analyzer):
             st.metric("Total de times:", len(df))
 
         with col_info2:
-            if 'gamesPlayed' in df.columns:
-                games_played = df['gamesPlayed'].sum() / 2
+            if "gamesPlayed" in df.columns:
+                games_played = df["gamesPlayed"].sum() / 2
                 st.metric("Total de Jogos", f"{games_played:.0f}")
 
         with col_info3:
-            if 'goalFor' in df.columns:
-                goals_for = df['goalFor'].sum()
-                avg_games_played = (df['gamesPlayed'].mean() * 32) / 2
+            if "goalFor" in df.columns:
+                goals_for = df["goalFor"].sum()
+                avg_games_played = (df["gamesPlayed"].mean() * 32) / 2
                 avg_goals_for = goals_for / avg_games_played
                 st.metric("Média de Gols Marcados", f"{avg_goals_for:.2f}")
-
 
         # Filtros interativos
         st.markdown("### 🔍 Filtros Avançados")
 
         col_filter1, col_filter2, col_filter3 = st.columns(3)
 
-         # Filtrar por colunas especificas
-        numeric_cols = ['wins', 'losses', 'otLosses', 'team_points', 'pointPctg', 'goalFor', 'goalAgainst']
+        # Filtrar por colunas especificas
+        numeric_cols = [
+            "wins",
+            "losses",
+            "otLosses",
+            "team_points",
+            "pointPctg",
+            "goalFor",
+            "goalAgainst",
+        ]
 
         # Mapeamento de nomes legíveis
         display_names = {
-                'wins': 'Vitórias',
-                'losses': 'Derrotas',
-                'otLosses': 'Derrotas em OT',
-                'team_points': 'Pontos',
-                'pointPctg': 'Percentual de Pontos',
-                'goalFor': 'Gols Marcados',
-                'goalAgainst': 'Gols Sofridos'
-            }
+            "wins": "Vitórias",
+            "losses": "Derrotas",
+            "otLosses": "Derrotas em OT",
+            "team_points": "Pontos",
+            "pointPctg": "Percentual de Pontos",
+            "goalFor": "Gols Marcados",
+            "goalAgainst": "Gols Sofridos",
+        }
 
         with col_filter1:
-
             # Seleção de coluna para filtrar
             if numeric_cols:
                 options = [display_names[col] for col in numeric_cols]
                 selected_display = st.selectbox("Filtrar por:", options)
-                filter_col = next(key for key, value in display_names.items()
-                         if value == selected_display)
+                filter_col = next(
+                    key
+                    for key, value in display_names.items()
+                    if value == selected_display
+                )
 
         with col_filter2:
-
-            st.markdown("""
+            st.markdown(
+                """
                 <style>
                 div[data-testid="stSlider"] {
                     max-width: 300px;
                 }
                 </style>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
             # Slider de valores
-            if 'filter_col' in locals():
+            if "filter_col" in locals():
                 min_val = int(df[filter_col].min())
                 max_val = int(df[filter_col].max())
                 filter_range = st.slider(
                     f"Valores de {selected_display}",
                     min_val,
                     max_val,
-                    (min_val, max_val)
+                    (min_val, max_val),
                 )
 
         with col_filter3:
-
             # Ordenação
-             if numeric_cols:
+            if numeric_cols:
                 sort_options = {col: display_names[col] for col in numeric_cols}
-                sort_display = st.selectbox("Ordenar por:", list(sort_options.values()), index=0)
-                sort_col = next(key for key, value in sort_options.items()
-                        if value == sort_display)
+                sort_display = st.selectbox(
+                    "Ordenar por:", list(sort_options.values()), index=0
+                )
+                sort_col = next(
+                    key for key, value in sort_options.items() if value == sort_display
+                )
                 sort_asc = st.checkbox("Ordem Crescente", value=False)
-
 
         # Aplicar filtros
         filtered_df = df.copy()
 
-        if 'filter_col' in locals() and 'filter_range' in locals():
+        if "filter_col" in locals() and "filter_range" in locals():
             filtered_df = filtered_df[
-                (filtered_df[filter_col] >= filter_range[0]) &
-                (filtered_df[filter_col] <= filter_range[1])
+                (filtered_df[filter_col] >= filter_range[0])
+                & (filtered_df[filter_col] <= filter_range[1])
             ]
 
-        if 'sort_col' in locals():
+        if "sort_col" in locals():
             filtered_df = filtered_df.sort_values(sort_col, ascending=sort_asc)
 
         # Exibir dados
@@ -391,75 +344,20 @@ def show_complete_data(analyzer):
             hide_index=True,
             height=800,
             column_config={
-                'team_logo': st.column_config.ImageColumn("Logo", width="small"),
-                'team_name': st.column_config.TextColumn("Time", width="medium"),
-            }
+                "team_logo": st.column_config.ImageColumn("Logo", width="small"),
+                "team_name": st.column_config.TextColumn("Time", width="medium"),
+            },
         )
 
         # Botões de ação
         col_action1 = st.columns(1)[0]
 
         with col_action1:
-            st.markdown(create_download_link(filtered_df, f"nhl_data_{selected_season}.csv"), unsafe_allow_html=True)
+            st.markdown(
+                create_download_link(filtered_df, f"nhl_data_{selected_season}.csv"),
+                unsafe_allow_html=True,
+            )
 
-def show_comparative_analysis(analyzer):
-    """Mostra análise comparativa entre temporadas."""
-
-    st.markdown("<h2 class='sub-header'>📈 Análise Comparativa entre Temporadas</h2>", unsafe_allow_html=True)
-
-    merged_data = analyzer.merge_all_seasons()
-
-    if merged_data.empty:
-        st.warning("Dados insuficientes para análise comparativa.")
-        return
-
-    # Estatísticas por temporada
-    season_stats = merged_data.groupby('season').agg({
-        'team_points': ['max'],
-        'goalFor': ['sum'],
-        'gamesPlayed': ['sum']
-    }).reset_index()
-
-    season_stats.columns = ['_'.join(col).strip() for col in season_stats.columns.values]
-    season_stats['goalForMean'] = season_stats['goalFor_sum'] / (season_stats['gamesPlayed_sum'] / 2)
-
-    #season_stats = season_stats.reset_index()
-
-    # Layout de análise
-    tab1, tab2, tab3 = st.tabs(["📊 Evolução", "🏆 Comparação", "📈 Tendências"])
-
-    with tab1:
-        st.markdown("### Evolução de Métricas por Temporada")
-
-        st.dataframe(season_stats, use_container_width=True)
-
-        col_evol1, col_evol2 = st.columns(2)
-
-        with col_evol1:
-
-            # Evolução da média de pontos
-            if 'team_points_max' in season_stats.columns:
-                fig_points = px.line(
-                    season_stats,
-                    x='season_',
-                    y='team_points_max',
-                    markers=True,
-                    title="Evolução do Total de Pontos",
-                    labels={'team_points_max': 'Pontos Máximos', 'season_': 'Temporada (Ano)'}
-                )
-                fig_points.update_traces(line=dict(width=3))
-                fig_points.update_xaxes(
-                    title_text="Temporada (Ano)",
-                    tickangle=0,  # Inclina os rótulos para melhor leitura
-                    tickmode='array',
-                    tickvals=season_stats['season_'],  # Garante que todas as temporadas apareçam
-                    ticktext=season_stats['season_'].str.replace('M', '')  # Remove o "M" se desejado
-                )
-                st.plotly_chart(fig_points, use_container_width=True)
-
-        with col_evol2:
-            ...
-            # Evolução média de gols marcados por jogo
 
 def show_player_data(analyzer):
     """Mostra dados dos jogadores."""
@@ -468,32 +366,31 @@ def show_player_data(analyzer):
     # Carregar dados dos jogadores
     player_data = analyzer.load_all_data_player()
 
-    if 'assists' in player_data.columns:
+    if "assists" in player_data.columns:
+        player_data["assists"] = pd.to_numeric(player_data["assists"], errors="coerce")
+        player_data["goals"] = pd.to_numeric(player_data["goals"], errors="coerce")
+        player_data["sweaterNumber"] = pd.to_numeric(
+            player_data["sweaterNumber"], errors="coerce"
+        )
 
-        player_data['assists'] = pd.to_numeric(player_data['assists'], errors='coerce')
-        player_data['goals'] = pd.to_numeric(player_data['goals'], errors='coerce')
-        player_data['sweaterNumber'] = pd.to_numeric(player_data['sweaterNumber'], errors='coerce')
-
-        if not player_data['assists'].isnull().all():
-
+        if not player_data["assists"].isnull().all():
             # Ordenar por assists
-            player_data_assists = player_data.sort_values(by='assists', ascending=False)
+            player_data_assists = player_data.sort_values(by="assists", ascending=False)
             player_data_assists = player_data_assists.reset_index(drop=True)
             player_data_assists_top3 = player_data_assists.head(5)
 
             # Ordenar por goals
-            player_data_goals = player_data.sort_values(by='goals', ascending=False)
+            player_data_goals = player_data.sort_values(by="goals", ascending=False)
             player_data_goals = player_data_goals.reset_index(drop=True)
             player_data_goals_top3 = player_data_goals.head(5)
 
             # Ordenar por points
-            player_data_points = player_data.sort_values(by='points', ascending=False)
+            player_data_points = player_data.sort_values(by="points", ascending=False)
             player_data_points = player_data_points.reset_index(drop=True)
             player_data_points_top3 = player_data_points.head(5)
 
-
             # Layout de análise
-            tab1, tab2, tab3 = st.tabs(["📊 2025-2026", "🏆 Comparação", "📈 Tendências"])
+            tab1, tab2, tab3 = st.tabs(["📊 2025-2026", "", ""])
 
             with tab1:
                 st.markdown("### 📊 Dados dos Jogadores da Temporada 2025-2026")
@@ -502,22 +399,29 @@ def show_player_data(analyzer):
                     col1, col2, col3 = st.columns([1, 1, 1])
 
                     with col1:
-                        st.markdown("<h2 style='font-size: 25px;'>🏆 ASSISTÊNCIAS</h2>", unsafe_allow_html=True)
+                        st.markdown(
+                            "<h2 style='font-size: 25px;'>🏆 ASSISTÊNCIAS</h2>",
+                            unsafe_allow_html=True,
+                        )
 
                         # PRIMEIRO LUGAR (🥇)
                         col_assists_img_1, col_assists_info_1 = st.columns([1, 1.5])
 
                         with col_assists_img_1:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_assists_top3['headshot'][0]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_assists_info_1:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥇</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_assists_top3['firstName'][0]} {player_data_assists_top3['lastName'][0]}</h1>
@@ -531,7 +435,9 @@ def show_player_data(analyzer):
                                         <strong>Efficiência:</strong> {player_data_assists_top3['shootingPctg'][0]:.2f}%
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -539,16 +445,20 @@ def show_player_data(analyzer):
                         col_assists_img_2, col_assists_info_2 = st.columns([1, 1.5])
 
                         with col_assists_img_2:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_assists_top3['headshot'][1]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_assists_info_2:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥈</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_assists_top3['firstName'][1]} {player_data_assists_top3['lastName'][1]}</h1>
@@ -561,7 +471,9 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_assists_top3['shots'][1]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -569,16 +481,20 @@ def show_player_data(analyzer):
                         col_assists_img_3, col_assists_info_3 = st.columns([1, 1.5])
 
                         with col_assists_img_3:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_assists_top3['headshot'][2]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_assists_info_3:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥉</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_assists_top3['firstName'][2]} {player_data_assists_top3['lastName'][2]}</h1>
@@ -591,27 +507,36 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_assists_top3['shots'][2]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
                     with col2:
-                        st.markdown("<h2 style='font-size: 25px;'>🏆 GOALS</h2>", unsafe_allow_html=True)
+                        st.markdown(
+                            "<h2 style='font-size: 25px;'>🏆 GOALS</h2>",
+                            unsafe_allow_html=True,
+                        )
 
                         # PRIMEIRO LUGAR (🥇)
                         col_goals_img_1, col_goals_info_1 = st.columns([1, 1.5])
 
                         with col_goals_img_1:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_goals_top3['headshot'][0]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_goals_info_1:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥇</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_goals_top3['firstName'][0]} {player_data_goals_top3['lastName'][0]}</h1>
@@ -624,7 +549,9 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_goals_top3['shots'][0]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -632,16 +559,20 @@ def show_player_data(analyzer):
                         col_goals_img_2, col_goals_info_2 = st.columns([1, 1.5])
 
                         with col_goals_img_2:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_goals_top3['headshot'][1]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_goals_info_2:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥈</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_goals_top3['firstName'][1]} {player_data_goals_top3['lastName'][1]}</h1>
@@ -654,7 +585,9 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_goals_top3['shots'][1]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -662,16 +595,20 @@ def show_player_data(analyzer):
                         col_goals_img_3, col_goals_info_3 = st.columns([1, 1.5])
 
                         with col_goals_img_3:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_goals_top3['headshot'][2]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_goals_info_3:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥉</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_goals_top3['firstName'][2]} {player_data_goals_top3['lastName'][2]}</h1>
@@ -684,27 +621,36 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_goals_top3['shots'][2]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
                     with col3:
-                        st.markdown("<h2 style='font-size: 25px;'>🏆 PONTOS</h2>", unsafe_allow_html=True)
+                        st.markdown(
+                            "<h2 style='font-size: 25px;'>🏆 PONTOS</h2>",
+                            unsafe_allow_html=True,
+                        )
 
                         # PRIMEIRO LUGAR (🥇)
                         col_points_img_1, col_points_info_1 = st.columns([1, 1.5])
 
                         with col_points_img_1:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_points_top3['headshot'][0]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_points_info_1:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥇</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_points_top3['firstName'][0]} {player_data_points_top3['lastName'][0]}</h1>
@@ -717,7 +663,9 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_points_top3['shots'][0]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -725,16 +673,20 @@ def show_player_data(analyzer):
                         col_points_img_2, col_points_info_2 = st.columns([1, 1.5])
 
                         with col_points_img_2:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_points_top3['headshot'][1]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_points_info_2:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥈</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_points_top3['firstName'][1]} {player_data_points_top3['lastName'][1]}</h1>
@@ -747,7 +699,9 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_points_top3['shots'][1]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -755,16 +709,20 @@ def show_player_data(analyzer):
                         col_points_img_3, col_points_info_3 = st.columns([1, 1.5])
 
                         with col_points_img_3:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="text-align: center;">
                                     <img src='{player_data_points_top3['headshot'][2]}'
                                     style='width: 600px; height: 400px; border-radius: 8%;
                                     border: 2px solid white; object-fit: cover;'>
                                 </div>
-                            """, unsafe_allow_html=True)
+                            """,
+                                unsafe_allow_html=True,
+                            )
 
                         with col_points_info_3:
-                            st.markdown(f"""
+                            st.markdown(
+                                f"""
                                 <div style="padding-left: -20px; margin-bottom: -500px;">
                                 <h1 style="margin-top: -30px; margin-bottom: -30px;">🥉</h1>
                                 <h1 style='color: white; font-size: 28px; margin-bottom: -10px;'>{player_data_points_top3['firstName'][2]} {player_data_points_top3['lastName'][2]}</h1>
@@ -777,7 +735,9 @@ def show_player_data(analyzer):
                                         <strong>Chutes:</strong> {player_data_points_top3['shots'][2]}<br>
                                     </p>
                                 </div>
-                        """, unsafe_allow_html=True)
+                        """,
+                                unsafe_allow_html=True,
+                            )
 
                         st.markdown("<hr>", unsafe_allow_html=True)
 
