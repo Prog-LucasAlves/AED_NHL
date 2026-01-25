@@ -212,6 +212,8 @@ Os módulos de extração utilizam a API pública da NHL:
 2. Start Command: **`streamlit run app`**
 3. Python Version(Environmen): **`3.13.5`**
 
+![ ](https://github.com/Prog-LucasAlves/AED_NHL/blob/main/image/render.png?raw=true)
+
 🔗 **Link do Deploy:** [https://aed-nhl.onrender.com/](https://aed-nhl.onrender.com/)
 
 ## 🤝 Como Contribuir
