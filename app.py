@@ -336,6 +336,9 @@ def show_complete_data(analyzer):
         if "sort_col" in locals():
             filtered_df = filtered_df.sort_values(sort_col, ascending=sort_asc)
 
+        # Modificar a coluna pointPctg para formato percentual com duas casas decimais
+        filtered_df["pointPctg"] = round(filtered_df["pointPctg"] * 100, 2)
+
         # Exibir dados
         st.markdown(f"### 📊 Dados da Temporada {selected_season}")
         st.dataframe(
@@ -346,6 +349,26 @@ def show_complete_data(analyzer):
             column_config={
                 "team_logo": st.column_config.ImageColumn("Logo", width="small"),
                 "team_name": st.column_config.TextColumn("Time", width="medium"),
+                "gamesPlayed": st.column_config.NumberColumn("Jogos", width="small"),
+                "wins": st.column_config.NumberColumn("Vitórias", width="small"),
+                "losses": st.column_config.NumberColumn("Derrotas", width="small"),
+                "otLosses": st.column_config.NumberColumn("Derrotas em OT"),
+                "team_points": st.column_config.NumberColumn("Pontos", width="small"),
+                "pointPctg": st.column_config.NumberColumn(
+                    "Pctg Pontos", format="%.2f%%"
+                ),
+                "goalFor": st.column_config.NumberColumn("Gols Marcados"),
+                "goalAgainst": st.column_config.NumberColumn("Gols Sofridos"),
+                "homeGamesPlayed": st.column_config.NumberColumn("Jogos em Casa"),
+                "homeWins": st.column_config.NumberColumn("Vitórias em Casa"),
+                "homeLosses": st.column_config.NumberColumn("Derrotas em Casa"),
+                "homeOtLosses": st.column_config.NumberColumn("Derrotas em OT em Casa"),
+                "homeGoalsFor": st.column_config.NumberColumn("Gols Marcados em Casa"),
+                "roadGamesPlayed": st.column_config.NumberColumn("Jogos Fora"),
+                "roadWins": st.column_config.NumberColumn("Vitórias Fora"),
+                "roadLosses": st.column_config.NumberColumn("Derrotas Fora"),
+                "roadOtLosses": st.column_config.NumberColumn("Derrotas em OT Fora"),
+                "roadGoalsFor": st.column_config.NumberColumn("Gols Marcados Fora"),
             },
         )
 
@@ -390,7 +413,7 @@ def show_player_data(analyzer):
             player_data_points_top3 = player_data_points.head(5)
 
             # Layout de análise
-            tab1, tab2, tab3 = st.tabs(["📊 2025-2026", "", ""])
+            tab1 = st.tabs(["📊 2025-2026"])[0]
 
             with tab1:
                 st.markdown("### 📊 Dados dos Jogadores da Temporada 2025-2026")
@@ -469,6 +492,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_assists_top3['fullTeamName'][1]}<br>
                                         <strong>Assistências:</strong> {player_data_assists_top3['assists'][1]}<br>
                                         <strong>Chutes:</strong> {player_data_assists_top3['shots'][1]}<br>
+                                        <strong>Efficiência:</strong> {player_data_assists_top3['shootingPctg'][1]:.2f}%
                                     </p>
                                 </div>
                         """,
@@ -505,6 +529,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_assists_top3['fullTeamName'][2]}<br>
                                         <strong>Assistências:</strong> {player_data_assists_top3['assists'][2]}<br>
                                         <strong>Chutes:</strong> {player_data_assists_top3['shots'][2]}<br>
+                                        <strong>Efficiência:</strong> {player_data_assists_top3['shootingPctg'][2]:.2f}%
                                     </p>
                                 </div>
                         """,
@@ -547,6 +572,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_goals_top3['fullTeamName'][0]}<br>
                                         <strong>Goals:</strong> {player_data_goals_top3['goals'][0]}<br>
                                         <strong>Chutes:</strong> {player_data_goals_top3['shots'][0]}<br>
+                                        <strong>Efficiência:</strong> {player_data_goals_top3['shootingPctg'][0]:.2f}%
                                     </p>
                                 </div>
                         """,
@@ -583,6 +609,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_goals_top3['fullTeamName'][1]}<br>
                                         <strong>Goals:</strong> {player_data_goals_top3['goals'][1]}<br>
                                         <strong>Chutes:</strong> {player_data_goals_top3['shots'][1]}<br>
+                                        <strong>Efficiência:</strong> {player_data_goals_top3['shootingPctg'][1]:.2f}%
                                     </p>
                                 </div>
                         """,
@@ -619,6 +646,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_goals_top3['fullTeamName'][2]}<br>
                                         <strong>Goals:</strong> {player_data_goals_top3['goals'][2]}<br>
                                         <strong>Chutes:</strong> {player_data_goals_top3['shots'][2]}<br>
+                                         <strong>Efficiência:</strong> {player_data_goals_top3['shootingPctg'][2]:.2f}%
                                     </p>
                                 </div>
                         """,
@@ -661,6 +689,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_points_top3['fullTeamName'][0]}<br>
                                         <strong>Pontos:</strong> {player_data_points_top3['points'][0]}<br>
                                         <strong>Chutes:</strong> {player_data_points_top3['shots'][0]}<br>
+                                        <strong>Efficiência:</strong> {player_data_points_top3['shootingPctg'][0]:.2f}%
                                     </p>
                                 </div>
                         """,
@@ -697,6 +726,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_points_top3['fullTeamName'][1]}<br>
                                         <strong>Pontos:</strong> {player_data_points_top3['points'][1]}<br>
                                         <strong>Chutes:</strong> {player_data_points_top3['shots'][1]}<br>
+                                        <strong>Efficiência:</strong> {player_data_points_top3['shootingPctg'][1]:.2f}%
                                     </p>
                                 </div>
                         """,
@@ -733,6 +763,7 @@ def show_player_data(analyzer):
                                         <strong>Time:</strong> {player_data_points_top3['fullTeamName'][2]}<br>
                                         <strong>Pontos:</strong> {player_data_points_top3['points'][2]}<br>
                                         <strong>Chutes:</strong> {player_data_points_top3['shots'][2]}<br>
+                                        <strong>Efficiência:</strong> {player_data_points_top3['shootingPctg'][2]:.2f}%
                                     </p>
                                 </div>
                         """,

@@ -3,11 +3,13 @@ Sistema de Extração de Dados da NHL com estruturas de dados personalidades.
 
 API Base: https://api-web.nhle.com/v1
 """
+
 import requests
 import pandas as pd
 import time
 from datetime import datetime
 from pathlib import Path
+
 
 class SimpleNHLExtractor:
     def __init__(self):
@@ -31,29 +33,32 @@ class SimpleNHLExtractor:
         """processa dados de um time"""
 
         return {
-            'team_logo': team.get('teamLogo'),
-            'team_name': team.get('teamName', {}).get('default'),
-            'gamesPlayed': team.get('gamesPlayed'),
-            'wins': team.get('wins'),
-            'losses': team.get('losses'),
-            'otLosses' :team.get('otLosses'),
-            'team_points': team.get('points'),
-            'pointPctg': team.get('pointPctg'),
-            'goalFor': team.get('goalFor'),
-            'goalAgainst': team.get('goalAgainst'),
+            "team_logo": team.get("teamLogo"),
+            "team_name": team.get("teamName", {}).get("default"),
+            "divisionName": team.get("divisionName"),
+            "gamesPlayed": team.get("gamesPlayed"),
+            "wins": team.get("wins"),
+            "losses": team.get("losses"),
+            "ties": team.get("ties"),
+            "otLosses": team.get("otLosses"),
+            "team_points": team.get("points"),
+            "pointPctg": team.get("pointPctg"),
+            "goalFor": team.get("goalFor"),
+            "goalAgainst": team.get("goalAgainst"),
             #
-            'homeGamesPlayed': team.get('homeGamesPlayed'),
-            'homeWins': team.get('homeWins'),
-            'homeLosses': team.get('homeLosses'),
-            'homeOtLosses': team.get('homeOtLosses'),
-            'homeGoalsFor': team.get('homeGoalsFor'),
+            "homeGamesPlayed": team.get("homeGamesPlayed"),
+            "homeWins": team.get("homeWins"),
+            "homeLosses": team.get("homeLosses"),
+            "homeOtLosses": team.get("homeOtLosses"),
+            "homeGoalsFor": team.get("homeGoalsFor"),
+            "homeGoalsAgainst": team.get("homeGoalsAgainst"),
             #
-            'roadGamesPlayed': team.get('roadGamesPlayed'),
-            'roadWins': team.get('roadWins'),
-            'roadLosses': team.get('roadLosses'),
-            'roadOtLosses': team.get('roadOtLosses'),
-            'roadGoalsFor': team.get('roadGoalsFor'),
-
+            "roadGamesPlayed": team.get("roadGamesPlayed"),
+            "roadWins": team.get("roadWins"),
+            "roadLosses": team.get("roadLosses"),
+            "roadOtLosses": team.get("roadOtLosses"),
+            "roadGoalsFor": team.get("roadGoalsFor"),
+            "roadGoalsAgainst": team.get("roadGoalsAgainst"),
         }
 
     def save_data(self, data, season_id):
@@ -70,15 +75,22 @@ class SimpleNHLExtractor:
         # Cria o diretório se não existir
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
-        df.to_csv(filepath, index=False, sep=';')
+        df.to_csv(filepath, index=False, sep=";")
         print(f"✔️ {filepath} salvo ({len(data)} times).")
+
 
 def main():
     """Função principal para executar a extração."""
 
     print("🏒 Extraindo dados da NHL...")
 
-    dates = ['2022-05-01', '2023-04-14', '2024-04-18', '2025-04-17', datetime.now().strftime('%Y-%m-%d')]
+    dates = [
+        "2022-05-01",
+        "2023-04-14",
+        "2024-04-18",
+        "2025-04-17",
+        datetime.now().strftime("%Y-%m-%d"),
+    ]
 
     extractor = SimpleNHLExtractor()
 
@@ -89,12 +101,12 @@ def main():
         if not data:
             continue
 
-        standings = data.get('standings', [])
+        standings = data.get("standings", [])
         if not standings:
             print(f"Sem dados para a data: {date}")
             continue
 
-        season_id = standings[0].get('seasonId', 'unknown')
+        season_id = standings[0].get("seasonId", "unknown")
 
         all_teams = []
         for team in standings:

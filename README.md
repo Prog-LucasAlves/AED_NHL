@@ -202,7 +202,7 @@ Os módulos de extração utilizam a API pública da NHL:
 - Base URL: **`https://api-web.nhle.com/v1`**
 
 - **`/player/{player_id}/landing`** - Dados do Jogador
-- /standings/{date} - Dados dos Times
+- **`/standings/{date}`** - Dados dos Times
 
 ## 🌐 Deploy na Render
 
@@ -210,7 +210,7 @@ Os módulos de extração utilizam a API pública da NHL:
 
 1. Build Command: **`uv sync`**
 2. Start Command: **`streamlit run app`**
-3. Python Version(Environmen): **`3.13.5`**
+3. Python Version(Environment Variables): **`3.13.5`**
 
 ![ ](https://github.com/Prog-LucasAlves/AED_NHL/blob/main/image/render.png?raw=true)
 

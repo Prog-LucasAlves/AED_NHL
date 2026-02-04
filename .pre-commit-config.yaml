@@ -20,6 +20,9 @@ repos:
     rev: v1.10.0
     hooks:
     -   id: mypy
+    additional_dependencies:
+            -   types-requests
+            -   types-pytz
 -   repo: https://github.com/PyCQA/bandit
     rev: 1.7.9
     hooks:
