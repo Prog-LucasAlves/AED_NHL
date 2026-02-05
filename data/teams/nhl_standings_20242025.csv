@@ -1,33 +1,33 @@
-team_logo;team_name;gamesPlayed;wins;losses;otLosses;team_points;pointPctg;goalFor;goalAgainst;homeGamesPlayed;homeWins;homeLosses;homeOtLosses;homeGoalsFor;roadGamesPlayed;roadWins;roadLosses;roadOtLosses;roadGoalsFor
-https://assets.nhle.com/logos/nhl/svg/WPG_light.svg;Winnipeg Jets;82;56;22;4;116;0.707317;277;191;41;30;7;4;139;41;26;15;0;138
-https://assets.nhle.com/logos/nhl/svg/WSH_secondary_light.svg;Washington Capitals;82;51;22;9;111;0.676829;288;232;41;26;9;6;153;41;25;13;3;135
-https://assets.nhle.com/logos/nhl/svg/VGK_light.svg;Vegas Golden Knights;82;50;22;10;110;0.670732;275;219;41;29;9;3;147;41;21;13;7;128
-https://assets.nhle.com/logos/nhl/svg/TOR_light.svg;Toronto Maple Leafs;82;52;26;4;108;0.658537;268;231;41;27;13;1;129;41;25;13;3;139
-https://assets.nhle.com/logos/nhl/svg/DAL_light.svg;Dallas Stars;82;50;26;6;106;0.646341;277;224;41;28;10;3;141;41;22;16;3;136
-https://assets.nhle.com/logos/nhl/svg/LAK_light.svg;Los Angeles Kings;82;48;25;9;105;0.640244;250;206;41;31;6;4;143;41;17;19;5;107
-https://assets.nhle.com/logos/nhl/svg/TBL_light.svg;Tampa Bay Lightning;82;47;27;8;102;0.621951;294;219;41;29;8;4;161;41;18;19;4;133
-https://assets.nhle.com/logos/nhl/svg/COL_light.svg;Colorado Avalanche;82;49;29;4;102;0.621951;277;234;41;26;12;3;145;41;23;17;1;132
-https://assets.nhle.com/logos/nhl/svg/EDM_light.svg;Edmonton Oilers;82;48;29;5;101;0.615854;259;236;41;25;13;3;134;41;23;16;2;125
-https://assets.nhle.com/logos/nhl/svg/CAR_light.svg;Carolina Hurricanes;82;47;30;5;99;0.603659;266;233;41;31;9;1;155;41;16;21;4;111
-https://assets.nhle.com/logos/nhl/svg/FLA_light.svg;Florida Panthers;82;47;31;4;98;0.597561;252;223;41;27;12;2;130;41;20;19;2;122
-https://assets.nhle.com/logos/nhl/svg/OTT_light.svg;Ottawa Senators;82;45;30;7;97;0.591463;243;234;41;27;11;3;139;41;18;19;4;104
-https://assets.nhle.com/logos/nhl/svg/MIN_light.svg;Minnesota Wild;82;45;30;7;97;0.591463;228;239;41;22;17;2;111;41;23;13;5;117
-https://assets.nhle.com/logos/nhl/svg/STL_20082009-20242025_light.svg;St. Louis Blues;82;44;30;8;96;0.585366;254;233;41;24;14;3;134;41;20;16;5;120
-https://assets.nhle.com/logos/nhl/svg/CGY_light.svg;Calgary Flames;82;41;27;14;96;0.585366;225;238;41;23;12;6;122;41;18;15;8;103
-https://assets.nhle.com/logos/nhl/svg/NJD_light.svg;New Jersey Devils;82;42;33;7;91;0.554878;242;222;41;19;17;5;118;41;23;16;2;124
-https://assets.nhle.com/logos/nhl/svg/MTL_light.svg;Montréal Canadiens;82;40;31;11;91;0.554878;245;265;41;23;12;6;125;41;17;19;5;120
-https://assets.nhle.com/logos/nhl/svg/VAN_light.svg;Vancouver Canucks;82;38;30;14;90;0.54878;236;253;41;17;16;8;112;41;21;14;6;124
-https://assets.nhle.com/logos/nhl/svg/UTA_20242025-20242025_light.svg;Utah Hockey Club;82;38;31;13;89;0.542683;241;251;41;18;15;8;118;41;20;16;5;123
-https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg;Columbus Blue Jackets;82;40;33;9;89;0.542683;273;268;41;26;10;5;165;41;14;23;4;108
-https://assets.nhle.com/logos/nhl/svg/DET_light.svg;Detroit Red Wings;82;39;35;8;86;0.52439;238;259;41;22;16;3;128;41;17;19;5;110
-https://assets.nhle.com/logos/nhl/svg/NYR_light.svg;New York Rangers;82;39;36;7;85;0.518293;256;255;41;19;19;3;119;41;20;17;4;137
-https://assets.nhle.com/logos/nhl/svg/NYI_light.svg;New York Islanders;82;35;35;12;82;0.5;224;260;41;19;17;5;115;41;16;18;7;109
-https://assets.nhle.com/logos/nhl/svg/PIT_light.svg;Pittsburgh Penguins;82;34;36;12;80;0.487805;243;293;41;21;15;5;132;41;13;21;7;111
-https://assets.nhle.com/logos/nhl/svg/ANA_light.svg;Anaheim Ducks;82;35;37;10;80;0.487805;221;263;41;21;18;2;123;41;14;19;8;98
-https://assets.nhle.com/logos/nhl/svg/BUF_light.svg;Buffalo Sabres;82;36;39;7;79;0.481707;269;289;41;23;15;3;144;41;13;24;4;125
-https://assets.nhle.com/logos/nhl/svg/SEA_light.svg;Seattle Kraken;82;35;41;6;76;0.463415;247;265;41;18;18;5;125;41;17;23;1;122
-https://assets.nhle.com/logos/nhl/svg/BOS_20242025-20242025_light.svg;Boston Bruins;82;33;39;10;76;0.463415;222;272;41;20;14;7;120;41;13;25;3;102
-https://assets.nhle.com/logos/nhl/svg/PHI_light.svg;Philadelphia Flyers;82;33;39;10;76;0.463415;238;286;41;20;20;1;122;41;13;19;9;116
-https://assets.nhle.com/logos/nhl/svg/NSH_light.svg;Nashville Predators;82;30;44;8;68;0.414634;214;274;41;20;18;3;123;41;10;26;5;91
-https://assets.nhle.com/logos/nhl/svg/CHI_19981999-20242025_light.svg;Chicago Blackhawks;82;25;46;11;61;0.371951;226;296;41;15;20;6;123;41;10;26;5;103
-https://assets.nhle.com/logos/nhl/svg/SJS_light.svg;San Jose Sharks;82;20;50;12;52;0.317073;210;315;41;12;27;2;104;41;8;23;10;106
+team_logo;team_name;divisionName;gamesPlayed;wins;losses;ties;otLosses;team_points;pointPctg;goalFor;goalAgainst;homeGamesPlayed;homeWins;homeLosses;homeOtLosses;homeGoalsFor;homeGoalsAgainst;roadGamesPlayed;roadWins;roadLosses;roadOtLosses;roadGoalsFor;roadGoalsAgainst
+https://assets.nhle.com/logos/nhl/svg/WPG_light.svg;Winnipeg Jets;Central;82;56;22;0;4;116;0.707317;277;191;41;30;7;4;139;81;41;26;15;0;138;110
+https://assets.nhle.com/logos/nhl/svg/WSH_secondary_light.svg;Washington Capitals;Metropolitan;82;51;22;0;9;111;0.676829;288;232;41;26;9;6;153;119;41;25;13;3;135;113
+https://assets.nhle.com/logos/nhl/svg/VGK_light.svg;Vegas Golden Knights;Pacific;82;50;22;0;10;110;0.670732;275;219;41;29;9;3;147;100;41;21;13;7;128;119
+https://assets.nhle.com/logos/nhl/svg/TOR_light.svg;Toronto Maple Leafs;Atlantic;82;52;26;0;4;108;0.658537;268;231;41;27;13;1;129;104;41;25;13;3;139;127
+https://assets.nhle.com/logos/nhl/svg/DAL_light.svg;Dallas Stars;Central;82;50;26;0;6;106;0.646341;277;224;41;28;10;3;141;103;41;22;16;3;136;121
+https://assets.nhle.com/logos/nhl/svg/LAK_light.svg;Los Angeles Kings;Pacific;82;48;25;0;9;105;0.640244;250;206;41;31;6;4;143;84;41;17;19;5;107;122
+https://assets.nhle.com/logos/nhl/svg/TBL_light.svg;Tampa Bay Lightning;Atlantic;82;47;27;0;8;102;0.621951;294;219;41;29;8;4;161;93;41;18;19;4;133;126
+https://assets.nhle.com/logos/nhl/svg/COL_light.svg;Colorado Avalanche;Central;82;49;29;0;4;102;0.621951;277;234;41;26;12;3;145;115;41;23;17;1;132;119
+https://assets.nhle.com/logos/nhl/svg/EDM_light.svg;Edmonton Oilers;Pacific;82;48;29;0;5;101;0.615854;259;236;41;25;13;3;134;121;41;23;16;2;125;115
+https://assets.nhle.com/logos/nhl/svg/CAR_light.svg;Carolina Hurricanes;Metropolitan;82;47;30;0;5;99;0.603659;266;233;41;31;9;1;155;101;41;16;21;4;111;132
+https://assets.nhle.com/logos/nhl/svg/FLA_light.svg;Florida Panthers;Atlantic;82;47;31;0;4;98;0.597561;252;223;41;27;12;2;130;99;41;20;19;2;122;124
+https://assets.nhle.com/logos/nhl/svg/OTT_light.svg;Ottawa Senators;Atlantic;82;45;30;0;7;97;0.591463;243;234;41;27;11;3;139;113;41;18;19;4;104;121
+https://assets.nhle.com/logos/nhl/svg/MIN_light.svg;Minnesota Wild;Central;82;45;30;0;7;97;0.591463;228;239;41;22;17;2;111;124;41;23;13;5;117;115
+https://assets.nhle.com/logos/nhl/svg/STL_20082009-20242025_light.svg;St. Louis Blues;Central;82;44;30;0;8;96;0.585366;254;233;41;24;14;3;134;110;41;20;16;5;120;123
+https://assets.nhle.com/logos/nhl/svg/CGY_light.svg;Calgary Flames;Pacific;82;41;27;0;14;96;0.585366;225;238;41;23;12;6;122;113;41;18;15;8;103;125
+https://assets.nhle.com/logos/nhl/svg/NJD_light.svg;New Jersey Devils;Metropolitan;82;42;33;0;7;91;0.554878;242;222;41;19;17;5;118;113;41;23;16;2;124;109
+https://assets.nhle.com/logos/nhl/svg/MTL_light.svg;Montréal Canadiens;Atlantic;82;40;31;0;11;91;0.554878;245;265;41;23;12;6;125;126;41;17;19;5;120;139
+https://assets.nhle.com/logos/nhl/svg/VAN_light.svg;Vancouver Canucks;Pacific;82;38;30;0;14;90;0.54878;236;253;41;17;16;8;112;128;41;21;14;6;124;125
+https://assets.nhle.com/logos/nhl/svg/UTA_20242025-20242025_light.svg;Utah Hockey Club;Central;82;38;31;0;13;89;0.542683;241;251;41;18;15;8;118;119;41;20;16;5;123;132
+https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg;Columbus Blue Jackets;Metropolitan;82;40;33;0;9;89;0.542683;273;268;41;26;10;5;165;124;41;14;23;4;108;144
+https://assets.nhle.com/logos/nhl/svg/DET_light.svg;Detroit Red Wings;Atlantic;82;39;35;0;8;86;0.52439;238;259;41;22;16;3;128;125;41;17;19;5;110;134
+https://assets.nhle.com/logos/nhl/svg/NYR_light.svg;New York Rangers;Metropolitan;82;39;36;0;7;85;0.518293;256;255;41;19;19;3;119;127;41;20;17;4;137;128
+https://assets.nhle.com/logos/nhl/svg/NYI_light.svg;New York Islanders;Metropolitan;82;35;35;0;12;82;0.5;224;260;41;19;17;5;115;131;41;16;18;7;109;129
+https://assets.nhle.com/logos/nhl/svg/PIT_light.svg;Pittsburgh Penguins;Metropolitan;82;34;36;0;12;80;0.487805;243;293;41;21;15;5;132;144;41;13;21;7;111;149
+https://assets.nhle.com/logos/nhl/svg/ANA_light.svg;Anaheim Ducks;Pacific;82;35;37;0;10;80;0.487805;221;263;41;21;18;2;123;128;41;14;19;8;98;135
+https://assets.nhle.com/logos/nhl/svg/BUF_light.svg;Buffalo Sabres;Atlantic;82;36;39;0;7;79;0.481707;269;289;41;23;15;3;144;134;41;13;24;4;125;155
+https://assets.nhle.com/logos/nhl/svg/SEA_light.svg;Seattle Kraken;Pacific;82;35;41;0;6;76;0.463415;247;265;41;18;18;5;125;125;41;17;23;1;122;140
+https://assets.nhle.com/logos/nhl/svg/BOS_20242025-20242025_light.svg;Boston Bruins;Atlantic;82;33;39;0;10;76;0.463415;222;272;41;20;14;7;120;117;41;13;25;3;102;155
+https://assets.nhle.com/logos/nhl/svg/PHI_light.svg;Philadelphia Flyers;Metropolitan;82;33;39;0;10;76;0.463415;238;286;41;20;20;1;122;134;41;13;19;9;116;152
+https://assets.nhle.com/logos/nhl/svg/NSH_light.svg;Nashville Predators;Central;82;30;44;0;8;68;0.414634;214;274;41;20;18;3;123;129;41;10;26;5;91;145
+https://assets.nhle.com/logos/nhl/svg/CHI_19981999-20242025_light.svg;Chicago Blackhawks;Central;82;25;46;0;11;61;0.371951;226;296;41;15;20;6;123;146;41;10;26;5;103;150
+https://assets.nhle.com/logos/nhl/svg/SJS_light.svg;San Jose Sharks;Pacific;82;20;50;0;12;52;0.317073;210;315;41;12;27;2;104;149;41;8;23;10;106;166
