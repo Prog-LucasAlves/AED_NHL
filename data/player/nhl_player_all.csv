@@ -196,7 +196,7 @@ playerId;headshot;firstName;lastName;sweaterNumber;fullTeamName;currentTeamAbbre
 8477149;https://assets.nhle.com/mugs/nhl/20252026/TBL/8477149.png;Scott;Sabourin;46.0;Tampa Bay Lightning;TBL;https://assets.nhle.com/logos/nhl/svg/TBL_light.svg;R;20252026;26;5;1;4;11;0.090909;0;0;0
 8481609;https://assets.nhle.com/mugs/nhl/20252026/DAL/8481609.png;Vladislav;Kolyachonok;44.0;Dallas Stars;DAL;https://assets.nhle.com/logos/nhl/svg/DAL_light.svg;D;20252026;13;3;1;2;12;0.083333;0;0;0
 8475188;https://assets.nhle.com/mugs/nhl/20252026/VGK/8475188.png;Brayden;McNabb;3.0;Vegas Golden Knights;VGK;https://assets.nhle.com/logos/nhl/svg/VGK_light.svg;D;20252026;63;12;5;7;81;0.061728;0;0;0
-8481167;https://assets.nhle.com/mugs/nhl/20252026/CGY/8481167.png;Brayden;Pachal;94.0;Calgary Flames;CGY;https://assets.nhle.com/logos/nhl/svg/CGY_light.svg;D;20252026;39;7;1;6;29;0.034483;0;0;0
+8481167;https://assets.nhle.com/mugs/nhl/20252026/CGY/8481167.png;Brayden;Pachal;94.0;Calgary Flames;CGY;https://assets.nhle.com/logos/nhl/svg/CGY_light.svg;D;20252026;39;7;1;6;28;0.035714;0;0;0
 8480001;https://assets.nhle.com/mugs/nhl/20252026/NYR/8480001.png;Urho;Vaakanainen;18.0;New York Rangers;NYR;https://assets.nhle.com/logos/nhl/svg/NYR_light.svg;D;20252026;34;6;0;6;23;0.0;0;0;0
 8480879;https://assets.nhle.com/mugs/nhl/20252026/DET/8480879.png;Jacob;Bernard-Docker;25.0;Detroit Red Wings;DET;https://assets.nhle.com/logos/nhl/svg/DET_light.svg?season=20252026;D;20252026;63;5;1;4;41;0.02439;0;0;0
 8481556;https://assets.nhle.com/mugs/nhl/20252026/CGY/8481556.png;John;Beecher;18.0;Calgary Flames;CGY;https://assets.nhle.com/logos/nhl/svg/CGY_light.svg;C;20252026;35;7;3;4;37;0.081081;0;0;0
@@ -214,7 +214,7 @@ playerId;headshot;firstName;lastName;sweaterNumber;fullTeamName;currentTeamAbbre
 8483455;https://assets.nhle.com/mugs/nhl/20252026/EDM/8483455.png;Isaac;Howard;53.0;Edmonton Oilers;EDM;https://assets.nhle.com/logos/nhl/svg/EDM_light.svg;L;20252026;29;5;2;3;36;0.055556;0;0;0
 8477499;https://assets.nhle.com/mugs/nhl/20252026/PHI/8477499.png;Rasmus;Ristolainen;55.0;Philadelphia Flyers;PHI;https://assets.nhle.com/logos/nhl/svg/PHI_light.svg;D;20252026;44;14;1;13;58;0.017241;0;1;0
 8482861;https://assets.nhle.com/mugs/nhl/20252026/NYR/8482861.png;Vincent;Iorio;6.0;New York Rangers;NYR;https://assets.nhle.com/logos/nhl/svg/NYR_light.svg;D;20252026;27;3;0;3;15;0.0;0;0;0
-8476856;https://assets.nhle.com/mugs/nhl/20252026/PIT/8476856.png;Mathew;Dumba;24.0;Pittsburgh Penguins;PIT;https://assets.nhle.com/logos/nhl/svg/PIT_light.svg;D;20252026;11;3;1;2;7;0.142857;0;0;0
+8476856;https://assets.nhle.com/mugs/nhl/latest/8476856.png;Mathew;Dumba;24.0;;;;D;20252026;11;3;1;2;7;0.142857;0;0;0
 8478443;https://assets.nhle.com/mugs/nhl/20252026/TOR/8478443.png;Brandon;Carlo;25.0;Toronto Maple Leafs;TOR;https://assets.nhle.com/logos/nhl/svg/TOR_light.svg;D;20252026;55;7;0;7;66;0.0;0;0;0
 8481491;https://assets.nhle.com/mugs/nhl/20252026/CAR/8481491.png;Noah;Philp;15.0;Carolina Hurricanes;CAR;https://assets.nhle.com/logos/nhl/svg/CAR_light.svg;C;20252026;17;3;2;1;14;0.142857;0;0;0
 8478046;https://assets.nhle.com/mugs/nhl/20252026/CBJ/8478046.png;Danton;Heinen;43.0;Columbus Blue Jackets;CBJ;https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg;L;20252026;46;12;6;6;44;0.136364;0;0;0
@@ -549,7 +549,7 @@ playerId;headshot;firstName;lastName;sweaterNumber;fullTeamName;currentTeamAbbre
 8480426;https://assets.nhle.com/mugs/nhl/20252026/TBL/8480426.png;Charle-Edouard;D'Astous;51.0;Tampa Bay Lightning;TBL;https://assets.nhle.com/logos/nhl/svg/TBL_light.svg;D;20252026;70;29;6;23;80;0.075;0;2;0
 8476331;https://assets.nhle.com/mugs/nhl/20252026/WPG/8476331.png;Dylan;DeMelo;2.0;Winnipeg Jets;WPG;https://assets.nhle.com/logos/nhl/svg/WPG_light.svg;D;20252026;82;19;3;16;75;0.04;0;0;0
 8477346;https://assets.nhle.com/mugs/nhl/20252026/UTA/8477346.png;MacKenzie;Weegar;52.0;Utah Mammoth;UTA;https://assets.nhle.com/logos/nhl/svg/UTA_light.svg?season=20252026;D;20252026;79;28;4;24;154;0.025974;0;6;0
-8475799;https://assets.nhle.com/mugs/nhl/20252026/WPG/8475799.png;Nino;Niederreiter;62.0;Winnipeg Jets;WPG;https://assets.nhle.com/logos/nhl/svg/WPG_light.svg;R;20252026;61;19;8;11;83;0.096386;1;5;0
+8475799;https://assets.nhle.com/mugs/nhl/20252026/WPG/8475799.png;Nino;Niederreiter;62.0;Winnipeg Jets;WPG;https://assets.nhle.com/logos/nhl/svg/WPG_light.svg;R;20252026;61;19;8;11;84;0.095238;1;5;0
 8476923;https://assets.nhle.com/mugs/nhl/20252026/CBJ/8476923.png;Damon;Severson;78.0;Columbus Blue Jackets;CBJ;https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg;D;20252026;71;32;8;24;93;0.086022;1;4;0
 8481711;https://assets.nhle.com/mugs/nhl/20252026/TOR/8481711.png;Matias;Maccelli;63.0;Toronto Maple Leafs;TOR;https://assets.nhle.com/logos/nhl/svg/TOR_light.svg;L;20252026;71;39;14;25;90;0.155556;2;8;0
 8482074;https://assets.nhle.com/mugs/nhl/20252026/CGY/8482074.png;Connor;Zary;47.0;Calgary Flames;CGY;https://assets.nhle.com/logos/nhl/svg/CGY_light.svg;C;20252026;74;25;12;13;110;0.109091;2;7;1
